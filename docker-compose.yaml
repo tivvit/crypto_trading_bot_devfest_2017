@@ -1,0 +1,29 @@
+version: '3'
+services:
+  simulate:
+    build: df_17
+    volumes:
+    - $PWD/df_17:/app
+    - $PWD/btc_data:/data
+#    command: -d /data/gdax/BTC-EUR_27_6_2017_200_days_min.json -e -g
+#    command: python /app/simulate.py -d /data/gdax/BTC-EUR_27_6_2017_200_days_min.json -e
+  grafana:
+    image: grafana/grafana
+    ports:
+    - "3000:3000"
+    volumes:
+    - "$PWD/grafana:/var/lib/grafana/"
+  elasticsearch:
+    image: elasticsearch
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    environment:
+    - ES_JAVA_OPTS=-Xms4g -Xmx4g
+  kibana:
+    image: kibana
+    ports:
+    - 5601:5601
+  index-delete:
+    image: elasticsearch
+    command: curl -XDELETE http://elasticsearch:9200/cryptotrade
