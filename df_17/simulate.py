@@ -129,6 +129,16 @@ def main() -> None:
             pass
 
         # todo your code goes HERE
+        # print(M1.close)
+        # if M1.ohlc_avg > 100:
+        #     print("buy")
+        # print(trade_stats["M10"].sequence)
+        if M1.timestamp == 1481416080:
+            open_trades = trade(M1, trade_volume(), False, open_trades, stats)
+
+        if M1.timestamp == 1481550720:
+            open_trades = trade(M1, trade_volume(), True, open_trades, stats)
+
 
         s = time.time() if time_perf else None
         stat = {

@@ -221,7 +221,7 @@ def trade(M1, volume, buy, active_trade, stats, no_fee=False):
                                       active_trade["sell"], FEE)
             return None
         if "buy" in active_trade and not buy:
-            diff = active_trade["buy"] - M1.hlc_avg
+            diff = M1.hlc_avg - active_trade["buy"]
             stats["profit"] += profit(diff, active_trade["volume"],
                                       active_trade["buy"], FEE)
             return None
